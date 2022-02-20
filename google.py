@@ -1,29 +1,23 @@
+import time
 import requests
 
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys ##셀레니움 임포트
 
-options = webdriver.ChromeOptions()
-options.add_experimental_option('excludeSwitches', ['enable-logging'])
-driver = webdriver.Chrome(options=options)  ##크롬으로 자동화
-
+driver = webdriver.Chrome()
 
 driver.get("https://www.freitag.ch/en/f41") ## 자동으로 들어갈 주소 입력
 
+driver.find_element_by_class_name('dismiss-cookies').click()
 
 
-preLinks =[]
+new_items = []
+for item in driver.find_elements_by_css_selector('#block-freitag-content > article > section:nth-child(2) > div > div > div > div > div:nth-child(2) > div.container.mx-auto > div > div > div > div.flex.flex-wrap > div:nth-child(n) div > picture > img'):
+    image_src = item.get_attribute('src')
 
-newLinks=[]
-
-for item in driver.find_elements_by_css_selector('#block-freitag-content > article > section:nth-child(2) > div > div > div > div > div:nth-child(2) > div.container.mx-auto > div > div > div > div.flex.flex-wrap>div'):
-    주소 = int(item.get_attribute('data-index'))
-
-print(주소)
-
-
-
-
+    new_items.append(image_src)
+ 
+print(new_items)
 
 # assert "Python" in driver.title
 # elem = driver.find_element_by_name("q")
