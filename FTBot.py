@@ -58,10 +58,13 @@ def ft_bot():
 
 #새로운 아이템이 업데이트 여부
 def check_new_item():
+    
     global curr_items
     global new_src
     global new_items
-       
+    
+    driver.refresh()
+    
     #전체 상품 조회
     driver.find_element_by_css_selector('#block-freitag-content > article > section:nth-child(2) > div > div > div > div > div:nth-child(2) > div.container.mx-auto > div > div > a > div').click()
 
@@ -70,15 +73,6 @@ def check_new_item():
     for item in driver.find_elements_by_css_selector('#block-freitag-content > article > section:nth-child(2) > div > div > div > div > div:nth-child(2) > div.container.mx-auto > div > div > div > div.flex.flex-wrap > div:nth-child(n) > div > picture > img'):
         new_src.append([item.get_attribute('src')])
         
-        
-        # update_src = []
-        # for v in new_src:
-        #     if v not in update_src:
-        #         update_src.append(v)
-                
-     
-    #전체 상품 조회
-    driver.find_element_by_css_selector('#block-freitag-content > article > section:nth-child(2) > div > div > div > div > div:nth-child(2) > div.container.mx-auto > div > div > a > div').click()
     
     update_src =[]
     
@@ -108,6 +102,9 @@ def check_new_item():
             
     else:
         print("재입고 되지 않았습니다")
+    
+    #전체 상품 조회
+    driver.find_element_by_css_selector('#block-freitag-content > article > section:nth-child(2) > div > div > div > div > div:nth-child(2) > div.container.mx-auto > div > div > a > div').click()
         
             
 new_items =[]            
