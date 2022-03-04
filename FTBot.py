@@ -48,8 +48,7 @@ def ft_bot():
     #프탁봇 주소 넣기
     token = "5274933678:AAE8ly2W28ghf-n1SGdYEEjQdY2A35HASIs"
     bot = telegram.Bot(token)
-    for i in bot.getUpdates():
-        print(i.message)
+    
     
     bot.send_message(5295081893,new_items)
     
