@@ -50,7 +50,7 @@ def ft_bot():
     bot = telegram.Bot(token)
     
     
-    bot.send_message(5295081893,"재입고되었습니다")
+    bot.send_message(5295081893,new_items[0])
     
     
     
@@ -74,18 +74,15 @@ def check_new_item():
         new_src.append([item.get_attribute('src')])
         
     
-    update_src =[]
+    # update_src =[]
     
-    for value in new_src:
-        if value not in update_src:
-            update_src.append(value)
+    # for value in new_src:
+    #     if value not in update_src:
+    #         update_src.append(value)
     
-    print(len(update_src))
-    
-    
+    # print(len(update_src))
     
     
-    print(len(new_items))
     print(len(curr_items))
     print(len(new_src))
     
