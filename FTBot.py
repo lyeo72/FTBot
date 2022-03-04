@@ -103,9 +103,7 @@ def check_new_item():
     else:
         print("재입고 되지 않았습니다")
     
-    #전체 상품 조회
-    driver.find_element_by_css_selector('#block-freitag-content > article > section:nth-child(2) > div > div > div > div > div:nth-child(2) > div.container.mx-auto > div > div > a > div').click()
-        
+      
             
 new_items =[]            
 curr_items =[]
