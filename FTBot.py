@@ -50,7 +50,7 @@ def ft_bot():
     bot = telegram.Bot(token)
     
     
-    bot.send_message(5295081893,new_items)
+    bot.send_message(5295081893,"재입고되었습니다")
     
     
     
@@ -61,31 +61,54 @@ def check_new_item():
     global curr_items
     global new_src
     global new_items
-    try:
-       #전체 상품 조회
-       driver.find_element_by_css_selector('#block-freitag-content > article > section:nth-child(2) > div > div > div > div > div:nth-child(2) > div.container.mx-auto > div > div > a > div').click()
+       
+    #전체 상품 조회
+    driver.find_element_by_css_selector('#block-freitag-content > article > section:nth-child(2) > div > div > div > div > div:nth-child(2) > div.container.mx-auto > div > div > a > div').click()
 
-    except:
-        pass
-    
     print(str(datetime.datetime.now()) +' 프라이탁에서 재입고된 아이템이 있는지 확인합니다')
-
     
     for item in driver.find_elements_by_css_selector('#block-freitag-content > article > section:nth-child(2) > div > div > div > div > div:nth-child(2) > div.container.mx-auto > div > div > div > div.flex.flex-wrap > div:nth-child(n) > div > picture > img'):
-        img_src = item.get_attribute('src')
-        new_src.append(img_src)
+        new_src.append([item.get_attribute('src')])
         
         
+        # update_src = []
+        # for v in new_src:
+        #     if v not in update_src:
+        #         update_src.append(v)
+                
+     
+    #전체 상품 조회
+    driver.find_element_by_css_selector('#block-freitag-content > article > section:nth-child(2) > div > div > div > div > div:nth-child(2) > div.container.mx-auto > div > div > a > div').click()
+    
+    update_src =[]
+    
+    for value in new_src:
+        if value not in update_src:
+            update_src.append(value)
+    
+    print(len(update_src))
+    
+    
+    
+    
+    print(len(new_items))
+    print(len(curr_items))
+    print(len(new_src))
+    
+    
+    
     
     new_items = [x for x in new_src if x not in curr_items]
-        
+    print(len(new_items))    
         
     if len(new_items) != 0:
         ft_bot()
         print("재입고 되었습니다")
+    
             
     else:
         print("재입고 되지 않았습니다")
+        
             
 new_items =[]            
 curr_items =[]
@@ -98,7 +121,7 @@ check_new_item()
 
 # 1분에 한번씩 실행
 schedule.every(1).minutes.do(check_new_item)
- 
+
 while True:
     schedule.run_pending()
     time.sleep(1)
