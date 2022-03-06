@@ -50,7 +50,7 @@ def ft_bot():
     bot = telegram.Bot(token)
     
     
-    bot.send_message(5295081893,new_items[0])
+    bot.send_message(5295081893,new_items[0]+"\n 상품이 업데이트 되었습니다")
     
     
     
@@ -71,7 +71,7 @@ def check_new_item():
     print(str(datetime.datetime.now()) +' 프라이탁에서 재입고된 아이템이 있는지 확인합니다')
     
     for item in driver.find_elements_by_css_selector('#block-freitag-content > article > section:nth-child(2) > div > div > div > div > div:nth-child(2) > div.container.mx-auto > div > div > div > div.flex.flex-wrap > div:nth-child(n) > div > picture > img'):
-        new_src.append([item.get_attribute('src')])
+        new_src.append(item.get_attribute('src'))
         
     
     # update_src =[]
